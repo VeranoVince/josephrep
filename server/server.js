@@ -1,25 +1,27 @@
 const express = require("express");
-const mysql = require("mysql2");
-const cors = require("cors");
 const nodemailer = require("nodemailer");
 const multer = require("multer");
 const axios = require("axios");
 
+// Create an Express app
 const app = express();
 const PORT = 3001;
 
-app.use(cors());
+// Middleware for parsing JSON and handling CORS
 app.use(express.json({ limit: "25mb" }));
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   next();
 });
 
+// Multer configuration for handling file uploads
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
+// Route handler for uploading files and sending emails
 app.post("/api/upload", upload.single("file"), async (req, res) => {
   try {
+    // Make a POST request to another endpoint using axios
     const response = await axios.post(
       "https://josephrep.vercel.app/api/upload",
       req.body,
@@ -30,10 +32,12 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
       }
     );
 
+    // Check if the file was uploaded successfully
     if (
       response.data &&
       response.data.message === "File uploaded successfully"
     ) {
+      // Destructure data from the request body
       const {
         selectedOption,
         fullName,
@@ -43,9 +47,9 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
         selectedJob,
         how,
       } = req.body;
-
       const fileData = req.file;
 
+      // Send email
       sendEmail({
         selectedOption,
         fullName,
@@ -57,18 +61,22 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
         how,
       })
         .then(() => {
+          // Send success response back to the client
           res.send({ message: "Email Sent Successfully" });
         })
         .catch((error) => {
+          // Handle email sending error
           console.error(error);
           res
             .status(500)
             .send({ message: "An error occurred while sending email" });
         });
     } else {
+      // Handle file upload failure
       res.status(500).send({ message: "File upload failed" });
     }
   } catch (error) {
+    // Handle axios request failure
     console.error("Proxy request failed:", error);
     res.status(500).send("Proxy request failed");
   }
