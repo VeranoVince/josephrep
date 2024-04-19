@@ -1,6 +1,7 @@
 const express = require("express");
 const nodemailer = require("nodemailer");
 const multer = require("multer");
+const axios = require("axios");
 const cors = require("cors");
 
 // Create an Express app
@@ -17,6 +18,70 @@ app.use((req, res, next) => {
 // Multer configuration for handling file uploads
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
+
+// Route handler for uploading files and sending emails
+app.post("/upload", upload.single("file"), async (req, res) => {
+  try {
+    // Make a POST request to another endpoint using axios
+    const response = await axios.post(
+      "https://josephrep-jvhms.vercel.app/upload",
+      req.body,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+
+    // Check if the file was uploaded successfully
+    if (
+      response.data &&
+      response.data.message === "File uploaded successfully"
+    ) {
+      // Destructure data from the request body
+      const {
+        selectedOption,
+        fullName,
+        email,
+        phoneNumber,
+        details,
+        selectedJob,
+        how,
+      } = req.body;
+      const fileData = req.file;
+
+      // Send email
+      sendEmail({
+        selectedOption,
+        fullName,
+        email,
+        phoneNumber,
+        details,
+        selectedJob,
+        fileData,
+        how,
+      })
+        .then(() => {
+          // Send success response back to the client
+          res.send({ message: "Email Sent Successfully" });
+        })
+        .catch((error) => {
+          // Handle email sending error
+          console.error(error);
+          res
+            .status(500)
+            .send({ message: "An error occurred while sending email" });
+        });
+    } else {
+      // Handle file upload failure
+      res.status(500).send({ message: "File upload failed" });
+    }
+  } catch (error) {
+    // Handle axios request failure
+    console.error("Proxy request failed:", error);
+    res.status(500).send("Proxy request failed");
+  }
+});
 
 function sendEmail({
   selectedOption,
@@ -244,6 +309,11 @@ function sendEmail({
     });
   }
 }
+app.get("/upload", upload.single("file"), (req, res) => {
+  sendEmail(req.body)
+    .then((response) => res.send(response.message))
+    .catch((error) => res.status(500).send(error.message));
+});
 
 app.get("/", (req, res) => {
   res.status(200).send("helloworld");
