@@ -24,7 +24,7 @@ app.post("/upload", upload.single("file"), async (req, res) => {
   try {
     // Make a POST request to another endpoint using axios
     const response = await axios.post(
-      "https://josephrep-jvhms.vercel.app/upload",
+      "https://josephrep.onrender.com/upload",
       req.body,
       {
         headers: {
