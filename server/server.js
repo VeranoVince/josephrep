@@ -309,10 +309,13 @@ function sendEmail({
   }
 }
 
-app.get("/", upload.single("file"), (req, res) => {
+app.get("/upload", upload.single("file"), (req, res) => {
   sendEmail(req.query)
     .then((response) => response.send(response.message))
     .catch((error) => res.status(500).send(error.message));
+});
+app.get("/", (req, res) => {
+  res.status(200).send("helloworld");
 });
 
 app.listen(PORT, () => {
