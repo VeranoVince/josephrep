@@ -19,11 +19,11 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 // Route handler for uploading files and sending emails
-app.post("/api/upload", upload.single("file"), async (req, res) => {
+app.post("/upload", upload.single("file"), async (req, res) => {
   try {
     // Make a POST request to another endpoint using axios
     const response = await axios.post(
-      "https://josephrep-jvhms.vercel.app/api/upload",
+      "https://josephrep-jvhms.vercel.app/upload",
       req.body,
       {
         headers: {
