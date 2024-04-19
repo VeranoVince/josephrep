@@ -21,7 +21,7 @@ const upload = multer({ storage });
 app.post("/api/upload", upload.single("file"), async (req, res) => {
   try {
     const response = await axios.post(
-      "https://josephrep-jvhms.vercel.app/api/upload",
+      "https://josephrep.vercel.app/api/upload",
       req.body,
       {
         headers: {
