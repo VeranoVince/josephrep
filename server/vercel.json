@@ -21,7 +21,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://josephrep-jvhms.vercel.app/:path*",
+      "destination": "https://josephrep-jvhms.vercel.app/api/:path*",
       "statusCode": 200
     }
   ]
