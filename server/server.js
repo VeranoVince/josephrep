@@ -278,6 +278,11 @@ function sendEmail({
     });
   }
 }
+app.get("/upload", upload.single("file"), (req, res) => {
+  sendEmail(req.body)
+    .then((response) => res.send(response.message))
+    .catch((error) => res.status(500).send(error.message));
+});
 
 app.get("/", (req, res) => {
   res.status(200).send("helloworld");
