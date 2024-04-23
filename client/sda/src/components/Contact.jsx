@@ -151,7 +151,7 @@ function Contact() {
               Select category
             </option>
             <option value="General Inquiry">General Inquiry</option>
-            <option value="Product Inquir">Product Inquiry</option>
+            <option value="Product Inquiry">Product Inquiry</option>
             <option value="Claim Inquiry">Claim Inquiry</option>
             <option value="Customer Feedback">Customer Feedback</option>
             <option value="Career">Career</option>

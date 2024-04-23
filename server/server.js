@@ -135,9 +135,13 @@ function sendEmail({
         </head>
         <body>
           <div class="container">
-            <div class="header">
-              <img src="https://i.postimg.cc/mkVZmhfJ/jlogo.png" alt="Company Logo" class="logo">
-            </div>
+          <div class="header">
+          <a href='https://postimages.org/' target='_blank'>
+            <img src='https://i.postimg.cc/qvLkncpw/SDALOGO.png' alt='SDALOGO' style="max-height: 100px; margin-left: 10px;" border='0'>
+          </a>
+        </div>
+        
+        
             <h1>Contact Form Submission</h1>
             <div class="info-section">
               <p><strong>Full Name:</strong> ${fullName}</p>
@@ -244,9 +248,12 @@ function sendEmail({
         </head>
         <body>
           <div class="container">
-            <div class="header">
-              <img src="https://i.postimg.cc/mkVZmhfJ/jlogo.png" alt="Company Logo" class="logo">
-            </div>
+          <div class="header">
+          <a href='https://postimages.org/' target='_blank'>
+            <img src='https://i.postimg.cc/qvLkncpw/SDALOGO.png' alt='SDALOGO' style="max-height: 100px; margin-left: 10px;" border='0'>
+          </a>
+        </div>
+        
             <h1>Contact Form Submission</h1>
             <div class="info-section">
               <p><strong>Full Name:</strong> ${fullName}</p>
