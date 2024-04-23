@@ -53,16 +53,6 @@
   }
 }
 
-.shadow {
-  width: 150px;
-  height: 24px;
-  background-color: rgba(0, 0, 0, 0.2);
-  margin-top: 100px;
-  border-radius: 50%;
-  filter: blur(7px);
-  animation: sha 1.8s infinite alternate;
-}
-
 @keyframes sha {
   0% {
     transform: scale(1, 1);

@@ -97,10 +97,10 @@ function NavScroll() {
         <Container fluid>
           <Navbar.Brand as={Link} to="/" onClick={() => handleClick("/")}>
             <img
-              src="/Images/jlogo.png"
+              src="/Images/SDALOGO.png"
               alt="SDATemp Logo"
               className="d-inline-block align-top img-fluid"
-              style={{ maxHeight: "150px" }}
+              style={{ maxHeight: "100px", marginLeft: "100px" }}
             />
           </Navbar.Brand>
 
@@ -126,7 +126,7 @@ function NavScroll() {
                 to="/news"
                 onClick={() => handleClick("/news")}
                 className="white-text"
-                style={{ paddingLeft: "380px" }}
+                style={{ paddingLeft: "450px" }}
               >
                 NEWS & MEDIA
               </Nav.Link>
